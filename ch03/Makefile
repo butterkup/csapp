@@ -1,6 +1,6 @@
-CC=clang -w -O0
+CC=clang -g -w -O0
 
-all: 07-main 01 link 04-main 03-main 02-main.s 05-main 06-main
+all: 07-main 01 link 04-main 03-main 02-main.s 05-main 06-main 08-main
 
 link: link.c link.s
 	$(CC) -o $@ $^
@@ -30,9 +30,13 @@ link: link.c link.s
 	$(CC) -S $^
 	$(CC) -o $@ $^
 
+08-main: 08-main.c 08.s
+	$(CC) -S $^
+	$(CC) -o $@ $^
+
 .PHONY+=clean
 clean:
 	rm -fv 06-main.s 06-main 01 05-main 05-main.s\
 		04-main 04-main.s 02-main.s 03-main 03-main.s\
-		07-main 07-main.s link
+		07-main 07-main.s link 08-main 08-main.s
 
