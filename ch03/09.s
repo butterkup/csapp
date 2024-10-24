@@ -76,6 +76,7 @@ author:
   .long 23
   .size author, 12
 
+  .section .rodata.str1.1, "aMS", @progbits, 1
   .type .author_name, @object
 .author_name:
   .asciz "Simon Nganga"

@@ -24,7 +24,7 @@ short dw_short(short x) {
   return x;
 }
 
-int main(int, char **) {
+int main(int argc, char **argv) {
   printf("Hello %s, you are %d years old.\n", author.name, author.age);
   char letters[] = {'A', 'B', 'c', 'd', 'z', 'Z'};
   for (size_t i = 0; i < sizeof(letters); i++)
