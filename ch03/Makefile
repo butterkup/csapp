@@ -1,6 +1,6 @@
 CC=gcc -g -w -O0
 
-all: glob 07-main 01 link 04-main 03-main 02-main.s 05-main 06-main 08-main 09-main 10-main
+all: glob 07-main 01 link 04-main 03-main 02-main.s 05-main 06-main 08-main 09-main 10-main 11-main
 
 hello: hello.s
 	$(CC) -o $@ $^
@@ -45,9 +45,11 @@ link: link.c link.s
 	$(CC) -S $^
 	$(CC) -o $@ $^
 
-10.1: 10.1.s
+11-main: 11-main.c
 	$(CC) -o $@ $^
 
+10.1: 10.1.s
+	$(CC) -o $@ $^
 
 glob: glob.c 
 	$(CC) -S $^
@@ -59,5 +61,5 @@ clean:
 		04-main 04-main.s 02-main.s 03-main 03-main.s\
 		07-main 07-main.s link 08-main 08-main.s hello\
 		10-main 10-main.s 09-main 09-main.s glob glob.s\
-		10.1
+		10.1 11-main
 
