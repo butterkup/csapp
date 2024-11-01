@@ -90,11 +90,11 @@ asm(
 "\n"
 );
 
-int main(int, char **) {
+int main(int argc, char **argv) {
   struct person me;
   strcpy((char*)&me.name, "John Doe");
   me.age = 16;
-  printf("%u\n", sizeof(struct person));
+  printf("%lu\n", sizeof(struct person));
   printf("My name is %s and I am %d years old.\n", me.name, me.age);
   goto start_prog;
 adult_age:

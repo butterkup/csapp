@@ -21,31 +21,36 @@ void matmul(size_t const r1, size_t const c1r2, size_t const c2,
   }
 }
 
-void matadd(size_t const r, size_t const c, mat_t const (*const A)[r][c],
-            mat_t (*const B)[r][c]) {
+void matbop(size_t const r, size_t const c, mat_t (*const A)[r][c],
+            mat_t const (*const B)[r][c],
+            mat_t (*const binary_op)(mat_t, mat_t)) {
   for (size_t i = 0; i < r; i++)
     for (size_t j = 0; j < c; j++)
-      (*B)[i][j] += (*A)[i][j];
+      (*A)[i][j] = binary_op((*A)[i][j], (*B)[i][j]);
 }
 
-void mateach(size_t const r, size_t const c, mat_t (*const A)[r][c],
-             mat_t (*const transform)(mat_t)) {
+void matuop(size_t const r, size_t const c, mat_t (*const A)[r][c],
+            mat_t (*const unary_op)(mat_t)) {
   for (size_t i = 0; i < r; i++)
     for (size_t j = 0; j < c; j++)
-      (*A)[i][j] = transform((*A)[i][j]);
+      (*A)[i][j] = unary_op((*A)[i][j]);
 }
 
 void matprint(size_t const r, size_t const c, mat_t const (*const M)[r][c]) {
   puts("[");
   for (size_t i = 0; i < r; i++) {
     printf("    ");
-    for (size_t j = 0; j < c; j++) {
+    for (size_t j = 0; j < c; j++)
       printf(_mat_t_fmt ", ", (*M)[i][j]);
-    }
     putchar('\n');
   }
   putchar(']');
 }
+
+mat_t _mat_bop_add(mat_t const a, mat_t const b) { return a + b; }
+mat_t _mat_bop_sub(mat_t const a, mat_t const b) { return a - b; }
+mat_t _mat_bop_mul(mat_t const a, mat_t const b) { return a * b; }
+mat_t _mat_bop_div(mat_t const a, mat_t const b) { return a / b; }
 
 static double scalar;
 mat_t scale(mat_t x) { return x * scalar; }
@@ -54,8 +59,6 @@ mat_t recpr(mat_t x) { return 1 / x; }
 
 int main() {
   mat_t A[3][5] = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}, {11, 12, 13, 14, 15}};
-  scalar = 2;
-  mateach(3, 5, &A, scale);
   mat_t B[5][4] = {{20, 19, 18, 17},
                    {16, 15, 14, 13},
                    {12, 11, 10, 9},
@@ -67,7 +70,7 @@ int main() {
   matprint(3, 5, &A);
   printf("\nB = ");
   matprint(5, 4, &B);
-  printf("\n C = ");
+  printf("\nC = ");
   matprint(3, 4, &C);
   putchar('\n');
 }

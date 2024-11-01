@@ -11,7 +11,7 @@ struct person  {
   } others;
 };
 
-void person_init(struct person*) {
+void person_init(struct person* _) {
   asm(
     "movq    $0x64,              8(%rdi)    # <-- age\n"
     "movabsq $0xFFFFFFFF,        %rax\n"
@@ -32,7 +32,7 @@ void print_person(struct person *p) {
   );
 }
 
-int main(int, char **) {
+int main(int argc, char **argv) {
   struct person me = {
     .name="John Doe",
     .age=22,

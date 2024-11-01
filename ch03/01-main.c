@@ -4,14 +4,14 @@ void multstore2(long, long, long*);
 void multstore3(int, int, int*);
 void multstore4(short, short, short*);
 
-int main(int, char**) {
+int main(int argc, char**argv) {
   long d2;
   int d3;
   short d4;
   multstore2(4, 8, &d2);
   multstore3(4, 8, &d3);
   multstore4(4, 8, &d4);
-  printf("4 * 8 --> %d\n", d2);
+  printf("4 * 8 --> %d\n", (int)d2);
   printf("4 * 8 --> %d\n", d3);
   printf("4 * 8 --> %d\n", d4);
   return 0;

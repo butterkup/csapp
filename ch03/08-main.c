@@ -22,7 +22,7 @@ int aTbPc(int a, int b, int c) {
   return a * b + c;
 }
 
-int main(int, char**) {
+int main(int argc, char**argv) {
   const char *people[] = {
     "Simon", "Faith", "David",
     "Charles", "Darius", "Lydia"

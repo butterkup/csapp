@@ -21,7 +21,7 @@ void person_print(struct person *p) {
       p->name, p->age);
 }
 
-int main(int, char **) {
+int main(int argc, char **argv) {
   struct person me = person_init("Simon Nganga", 22);
   person_print(&me);
   putchar('\n');

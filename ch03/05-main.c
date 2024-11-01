@@ -11,7 +11,7 @@ void mult(union value* v) {
   v->result = v->args.a * (uint128_t) v->args.b;
 }
 
-void mult2(union value *) {
+void mult2(union value *_) {
   asm(
     "movq   (%rdi), %rax\n"
     "imulq  8(%rdi)\n"
@@ -26,7 +26,7 @@ void remdiv(union value *v) {
   v->args.b = a % b;
 }
 
-void remdiv2(union value *) {
+void remdiv2(union value *_) {
   asm(
     "movq   (%rdi), %rax\n"
     "cqto\n"
@@ -36,7 +36,7 @@ void remdiv2(union value *) {
   );
 }
 
-int main(int, char **) {
+int main(int argc, char **argv) {
   union value _v = {
     .args = {
       .a = 0x1001001001001001,
@@ -44,16 +44,16 @@ int main(int, char **) {
     }
   }, v = _v;
   printf("%ld * %ld = ", v.args.a, v.args.b); mult(&v);
-  printf("[%ld,%ld] -> %.llf\n", v.args.a, v.args.b, v.result);
+  printf("[%ld,%ld] -> %Lf\n", v.args.a, v.args.b, v.result);
   v = _v;
   printf("%ld * %ld = ", v.args.a, v.args.b); mult2(&v);
-  printf("[%ld,%ld] -> %.llf\n", v.args.a, v.args.b, v.result);
+  printf("[%ld,%ld] -> %Lf\n", v.args.a, v.args.b, v.result);
   
   v = _v;
   printf("%ld / %ld = ", v.args.a, v.args.b); remdiv(&v);
-  printf("[%ld,%ld] -> %.llf\n", v.args.a, v.args.b, v.result);
+  printf("[%ld,%ld] -> %Lf\n", v.args.a, v.args.b, v.result);
   v = _v;
   printf("%ld / %ld = ", v.args.a, v.args.b); remdiv2(&v);
-  printf("[%ld,%ld] -> %.llf\n", v.args.a, v.args.b, v.result);
+  printf("[%ld,%ld] -> %Lf\n", v.args.a, v.args.b, v.result);
 }
 

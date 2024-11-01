@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(int, char **) {
+int main(int argc, char **argv) {
   signed short sshrt;
   unsigned short ushrt;
   long slng = sshrt;
