@@ -1,6 +1,6 @@
-CC=gcc -g -w -O0
+CC?=gcc -g -w -O0
 
-all: 13.1 13-main glob 07-main 01 link 04-main 03-main 02-main.s 05-main 06-main 08-main 09-main 10-main 11-main
+all: lib14.so 14-main 13.1 13-main glob 07-main 01 link 04-main 03-main 02-main.s 05-main 06-main 08-main 09-main 10-main 11-main
 
 hello: hello.s
 	$(CC) -o $@ $^
@@ -51,14 +51,21 @@ link: link.c link.s
 12-main: 12-main.c
 	$(CC) -o $@ $^
 
-13-main: 13-main.c 
+13-main: 13-main.c
 	$(CC) -o $@ $^
 	$(CC) -S $^
 
-13.1: 13.1.s
-	$(CC) -o $@ $^
+14-main: 14-main.c lib14.so
+	$(CC) -o $@ $< -L. -Wl,-rpath=. -l14
+	$(CC) -S $<
+
+lib14.so: 14.c 14.h
+	$(CC) -o $@ -shared -fPIC $<
 
 10.1: 10.1.s
+	$(CC) -o $@ $^
+
+13.1: 13.1.s
 	$(CC) -o $@ $^
 
 glob: glob.c 
@@ -71,5 +78,6 @@ clean:
 		04-main 04-main.s 02-main.s 03-main 03-main.s\
 		07-main 07-main.s link 08-main 08-main.s hello\
 		10-main 10-main.s 09-main 09-main.s glob glob.s\
-		10.1 13.1 11-main 12-main 13-main 13-main.s
+		10.1 13.1 11-main 12-main 13-main 13-main.s\
+		14-main.s 14-main lib14.so
 

@@ -34,7 +34,7 @@ asm(
   "  sqrtss %xmm0, %xmm0\n"
   "  ret\n"
   "  .cfi_endproc\n"
-  
+
   "  .globl fand\n"
   "  .type fand, @function\n"
   "fand:\n"
