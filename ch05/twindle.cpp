@@ -10,6 +10,6 @@ struct hey {
 hey h1, h3;
 hey &h2 = h1;
 int main() {
-  h1.swap(h1);
+  h1.swap(h2);
   return h2.value;
 }
