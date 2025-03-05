@@ -1,0 +1,11 @@
+
+#ifndef NAME
+# error NAME macro not defined
+#endif
+
+#ifndef AGE
+# error AGE macro not defined
+#endif
+
+Hello NAME, you are now AGE years old. Congratulations!
+

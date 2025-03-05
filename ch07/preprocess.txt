@@ -1,0 +1,11 @@
+// compile using the c/c++ preprocessor `cpp -nostdinc -xc -DIMOREDATA preprocess.txt`
+
+#define NAME John Doe
+#define AGE 29
+
+#ifdef IMOREDATA
+# include "moredata.txt"
+#endif
+
+My name is NAME, I am AGE years old!
+
